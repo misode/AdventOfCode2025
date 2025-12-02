@@ -9,16 +9,10 @@ for r in input[0].split(","):
   start, end = [int(p) for p in r.split("-")]
   for num in range(start, end+1):
     s = str(num)
-    L = len(s)
-    for n in range(2, L+1):
-      if L % n != 0:
-        continue
-      parts = [s[i:i + L // n] for i in range(0, L, L // n)]
-      if len(set(parts)) == 1:
-        if n == 2:
-          p1 += num
-        p2 += num
-        break
+    if s[:len(s)//2] == s[len(s)//2:]:
+      p1 += num
+    if s in (s + s)[1:-1]: # https://stackoverflow.com/a/55840779
+      p2 += num
 
 print(p1)
 print(p2)
